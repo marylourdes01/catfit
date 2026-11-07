@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FitConnect – Acompanhamento Aluno e Personal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>FitConnect</h1>
+    <p>Treinos e acompanhamento entre aluno e personal.</p>
+    <div class="tabs" role="tablist">
+      <button id="btn-aluno" class="on" onclick="setRole('aluno')">Sou aluno</button>
+      <button id="btn-personal" onclick="setRole('personal')">Sou personal</button>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Progresso da semana</h2>
+      <div class="bar"><div id="fill"></div></div>
+      <p id="progress-text"></p>
+    </section>
+
+    <section>
+      <h2>Treinos</h2>
+      <div id="week"></div>
+    </section>
+
+    <section id="personal-box" hidden>
+      <h2>Adicionar exercício</h2>
+      <form id="add-form">
+        <select id="f-day"></select>
+        <input id="f-name" placeholder="Exercício (ex.: Agachamento)" required>
+        <input id="f-sets" placeholder="Séries x repetições (ex.: 3x12)" required>
+        <button class="primary">Adicionar ao treino</button>
+      </form>
+    </section>
+
+    <section id="aluno-box">
+      <h2>Registrar treino de hoje</h2>
+      <form id="log-form">
+        <label>Peso (kg) <input id="l-peso" type="number" step="0.1" min="20" required></label>
+        <label>Esforço (1 leve – 5 muito pesado)
+          <input id="l-esforco" type="range" min="1" max="5" value="3"></label>
+        <textarea id="l-nota" rows="2" placeholder="Como foi o treino?"></textarea>
+        <button class="primary">Salvar registro</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Histórico</h2>
+      <ul id="history"></ul>
+    </section>
+
+    <section>
+      <h2>Recado do personal</h2>
+      <p id="feedback-view" class="note"></p>
+      <form id="fb-form" hidden>
+        <textarea id="fb-text" rows="2" placeholder="Escreva um feedback para o aluno"></textarea>
+        <button class="primary">Enviar recado</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>Projeto de portfólio · HTML, CSS e JavaScript · dados salvos no seu navegador</footer>
+  <script src="script.js"></script>
+</body>
+</html>
