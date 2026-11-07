@@ -259,3 +259,6 @@ function goSlide(n) {
 $("next").onclick = () => goSlide(cur + 1);
 $("prev").onclick = () => goSlide(cur - 1);
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(() => goSlide(cur + 1), 7000);
+
+/* Contato */
+$("btn-contato").onclick = () => toast("Demonstração: contato fictício.");

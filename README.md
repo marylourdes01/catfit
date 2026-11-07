@@ -1,4 +1,4 @@
-# FitConnect
+# CatFit
 
 Aplicação web de acompanhamento entre aluno e personal trainer.
 
