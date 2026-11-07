@@ -247,3 +247,15 @@ $("reg-form").onsubmit = (e) => {
 };
 
 renderUsers();
+
+/* ---------- Slider do topo ---------- */
+const slides = [...document.querySelectorAll(".slide")];
+let cur = 0;
+function goSlide(n) {
+  cur = (n + slides.length) % slides.length;
+  slides.forEach((s, i) => s.classList.toggle("on", i === cur));
+  $("count").textContent = "0" + (cur + 1);
+}
+$("next").onclick = () => goSlide(cur + 1);
+$("prev").onclick = () => goSlide(cur - 1);
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(() => goSlide(cur + 1), 7000);
