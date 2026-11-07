@@ -3,68 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FitConnect – Acompanhamento Aluno e Personal</title>
+  <title>FitConnect – Aluno e Personal, juntos</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>FitConnect</h1>
-    <p>Treinos e acompanhamento entre aluno e personal.</p>
-    <div class="tabs" role="tablist">
-      <button id="btn-aluno" class="on" onclick="setRole('aluno')">Sou aluno</button>
-      <button id="btn-personal" onclick="setRole('personal')">Sou personal</button>
-    </div>
-  </header>
+<header class="top">
+  <strong class="brand">FitConnect</strong>
+  <button id="me" class="me" aria-label="Meu perfil"></button>
+  <nav>
+    <button data-view="inicio" class="on">Início</button>
+    <button data-view="aluno">Aluno</button>
+    <button data-view="personal">Personal</button>
+    <button data-view="pacotes">Pacotes</button>
+    <button data-view="personais">Personais</button>
+    <button data-view="cadastro">Cadastro</button>
+  </nav>
+</header>
 
-  <main>
-    <section>
-      <h2>Progresso da semana</h2>
+<main>
+  <!-- INÍCIO -->
+  <section id="view-inicio" class="view">
+    <div class="hero">
+      <div>
+        <h1>Treine com quem acompanha cada passo.</h1>
+        <p>O personal monta a semana, o aluno marca o que fez e os dois veem a evolução em tempo real.</p>
+        <button class="primary" data-go="aluno">Sou aluno</button>
+        <button class="ghost" data-go="personal">Sou personal</button>
+      </div>
+      <svg viewBox="0 0 320 200" role="img" aria-label="Ilustração de halter e batimentos">
+        <rect width="320" height="200" rx="24" fill="var(--hot)"/>
+        <path d="M0 150 L60 150 L80 110 L110 180 L140 80 L170 150 L320 150" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".5"/>
+        <rect x="95" y="90" width="130" height="14" rx="7" fill="#fff"/>
+        <rect x="70" y="62" width="24" height="70" rx="8" fill="var(--ink)"/>
+        <rect x="226" y="62" width="24" height="70" rx="8" fill="var(--ink)"/>
+        <rect x="48" y="76" width="18" height="42" rx="6" fill="var(--ink)"/>
+        <rect x="254" y="76" width="18" height="42" rx="6" fill="var(--ink)"/>
+      </svg>
+    </div>
+    <div class="grid3">
+      <article class="card"><span class="ico">📅</span><h3>Semana organizada</h3><p>Treino fixo por dia, sem confusão.</p></article>
+      <article class="card"><span class="ico">✅</span><h3>Check de exercícios</h3><p>O aluno marca e vê o progresso.</p></article>
+      <article class="card"><span class="ico">💬</span><h3>Recados do personal</h3><p>Feedback direto, na mesma tela.</p></article>
+    </div>
+    <p class="center"><button class="primary" data-go="pacotes">Ver pacotes de treino</button></p>
+  </section>
+
+  <!-- ALUNO -->
+  <section id="view-aluno" class="view" hidden>
+    <h2>🏃 Área do aluno</h2>
+    <div class="card"><h3>Meu personal</h3><div id="my-trainer"></div></div>
+    <div class="card">
+      <h3>Progresso da semana <small id="week-label"></small></h3>
       <div class="bar"><div id="fill"></div></div>
       <p id="progress-text"></p>
-    </section>
-
-    <section>
-      <h2>Treinos</h2>
-      <div id="week"></div>
-    </section>
-
-    <section id="personal-box" hidden>
-      <h2>Adicionar exercício</h2>
-      <form id="add-form">
-        <select id="f-day"></select>
-        <input id="f-name" placeholder="Exercício (ex.: Agachamento)" required>
-        <input id="f-sets" placeholder="Séries x repetições (ex.: 3x12)" required>
-        <button class="primary">Adicionar ao treino</button>
-      </form>
-    </section>
-
-    <section id="aluno-box">
-      <h2>Registrar treino de hoje</h2>
+    </div>
+    <div class="card"><h3>Meu treino</h3><div id="week-aluno"></div></div>
+    <div class="card">
+      <h3>Registrar treino de hoje</h3>
       <form id="log-form">
         <label>Peso (kg) <input id="l-peso" type="number" step="0.1" min="20" required></label>
-        <label>Esforço (1 leve – 5 muito pesado)
+        <label>Esforço: <output id="l-out">3</output>/5
           <input id="l-esforco" type="range" min="1" max="5" value="3"></label>
         <textarea id="l-nota" rows="2" placeholder="Como foi o treino?"></textarea>
         <button class="primary">Salvar registro</button>
       </form>
-    </section>
+    </div>
+    <div class="card"><h3>Histórico</h3><ul id="history"></ul></div>
+    <div class="card"><h3>💬 Recado do personal</h3><p id="fb-aluno" class="muted"></p></div>
+    <div class="card"><h3>🛒 Meus pacotes</h3><ul id="my-packs"></ul></div>
+  </section>
 
-    <section>
-      <h2>Histórico</h2>
-      <ul id="history"></ul>
-    </section>
-
-    <section>
-      <h2>Recado do personal</h2>
-      <p id="feedback-view" class="note"></p>
-      <form id="fb-form" hidden>
-        <textarea id="fb-text" rows="2" placeholder="Escreva um feedback para o aluno"></textarea>
+  <!-- PERSONAL -->
+  <section id="view-personal" class="view" hidden>
+    <h2>🏋️ Área do personal</h2>
+    <div class="card">
+      <h3>Montar a semana</h3>
+      <p id="lock-msg" class="muted"></p>
+      <form id="add-form">
+        <p class="label">Dias do treino</p>
+        <div id="days-check" class="chips"></div>
+        <label>Exercícios (um por linha)
+          <textarea id="f-list" rows="5" placeholder="Agachamento - 3x12&#10;Flexão - 3x10&#10;Prancha - 3x30s" required></textarea>
+        </label>
+        <button class="primary">Adicionar aos dias marcados</button>
+      </form>
+      <div class="row">
+        <button id="btn-lock" class="ghost"></button>
+        <button id="btn-new" class="ghost">Nova semana</button>
+      </div>
+    </div>
+    <div class="card"><h3>Treino da semana</h3><div id="week-personal"></div></div>
+    <div class="card">
+      <h3>Enviar recado ao aluno</h3>
+      <form id="fb-form">
+        <textarea id="fb-text" rows="2" placeholder="Escreva um feedback" required></textarea>
         <button class="primary">Enviar recado</button>
       </form>
-    </section>
-  </main>
+    </div>
+    <div class="card"><h3>Registros do aluno</h3><ul id="history-p"></ul></div>
+    <div class="card"><h3>Pedidos de pacotes</h3><ul id="orders"></ul></div>
+  </section>
 
-  <footer>Projeto de portfólio · HTML, CSS e JavaScript · dados salvos no seu navegador</footer>
-  <script src="script.js"></script>
+  <!-- PACOTES -->
+  <section id="view-pacotes" class="view" hidden>
+    <h2>🛒 Pacotes de treino</h2>
+    <div id="packs" class="grid3"></div>
+    <div class="card scroll">
+      <h3>Compare os pacotes</h3>
+      <table>
+        <thead><tr><th>Item</th><th>Iniciante</th><th>Hipertrofia</th><th>Emagrecimento</th></tr></thead>
+        <tbody>
+          <tr><td>Guia em PDF</td><td>✔</td><td>✔</td><td>✔</td></tr>
+          <tr><td>Treinos por semana</td><td>3</td><td>5</td><td>4</td></tr>
+          <tr><td>Vídeos dos exercícios</td><td>—</td><td>✔</td><td>✔</td></tr>
+          <tr><td>Dicas de alimentação</td><td>—</td><td>—</td><td>✔</td></tr>
+          <tr><td>Suporte do personal</td><td>—</td><td>7 dias</td><td>14 dias</td></tr>
+          <tr><td>Valor</td><td>R$ 29,90</td><td>R$ 49,90</td><td>R$ 59,90</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted center">Valores de exemplo para o portfólio. Nenhum pagamento real é feito.</p>
+  </section>
+
+  <!-- PERSONAIS -->
+  <section id="view-personais" class="view" hidden>
+    <h2>🧑‍🏫 Personais cadastrados</h2>
+    <p class="muted">Escolha com quem você quer treinar.</p>
+    <div id="trainers" class="view"></div>
+  </section>
+
+  <!-- CADASTRO -->
+  <section id="view-cadastro" class="view" hidden>
+    <h2>📝 Cadastro</h2>
+    <div id="profile-card" class="card" hidden></div>
+    <div id="reg-card" class="card">
+      <div class="chips">
+        <label><input type="radio" name="tipo" value="aluno" checked>Sou aluno</label>
+        <label><input type="radio" name="tipo" value="personal">Sou personal</label>
+      </div>
+      <form id="reg-form">
+        <div class="photo-row">
+          <div id="photo-prev" class="photo">📷</div>
+          <label class="filebtn">Escolher foto<input id="r-foto" type="file" accept="image/*" hidden></label>
+        </div>
+        <label>Nome <input id="r-nome" required maxlength="60"></label>
+        <label>E-mail (fictício) <input id="r-email" type="email" required maxlength="80"></label>
+        <fieldset id="f-aluno">
+          <label>Idade <input id="a-idade" type="number" min="12" max="99" required></label>
+          <label>Objetivo
+            <select id="a-obj"><option>Hipertrofia</option><option>Emagrecimento</option><option>Condicionamento</option><option>Saúde e bem-estar</option></select></label>
+          <label>Peso (kg) <input id="a-peso" type="number" step="0.1"></label>
+          <label>Altura (cm) <input id="a-alt" type="number"></label>
+          <label>Restrições de saúde <textarea id="a-rest" rows="2" maxlength="200"></textarea></label>
+        </fieldset>
+        <fieldset id="f-personal" hidden disabled>
+          <label>CREF (opcional, use um número fictício) <input id="p-cref" maxlength="20"></label>
+          <label>Especialidades <input id="p-esp" placeholder="Ex.: Hipertrofia, Corrida" maxlength="80"></label>
+          <label>Cidade <input id="p-cid" required maxlength="40"></label>
+          <label>Valor da consulta (R$) <input id="p-val" type="number" min="0"></label>
+          <label>Mini bio <textarea id="p-bio" rows="2" maxlength="200"></textarea></label>
+        </fieldset>
+        <button class="primary">Criar cadastro</button>
+      </form>
+    </div>
+    <p class="muted center">Demonstração: use somente dados fictícios.</p>
+  </section>
+</main>
+
+<footer>Projeto de portfólio · HTML, CSS e JavaScript · dados salvos no seu navegador</footer>
+<div id="toast" role="status"></div>
+<script src="script.js"></script>
 </body>
 </html>

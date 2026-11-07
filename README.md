@@ -1,23 +1,21 @@
 # FitConnect
 
-Aplicação web para acompanhamento entre aluno e personal trainer.
+Aplicação web de acompanhamento entre aluno e personal trainer.
 
 ## Funcionalidades
-- Plano de treino semanal
-- Aluno marca exercícios concluídos e registra peso e esforço
-- Personal adiciona/remove exercícios e envia recados
-- Barra de progresso da semana
-- Dados salvos no navegador (localStorage)
+- Páginas separadas: Início, Aluno, Personal e Pacotes
+- Personal monta a semana: vários dias e vários exercícios de uma vez
+- Semana fixa (bloqueada) até o personal liberar a edição
+- Aluno marca exercícios, vê o progresso e registra peso e esforço
+- Recados do personal
+- Pacotes de treino com cards e tabela comparativa
+- Pedidos de pacote aparecem para aluno e personal
+- Tema claro e escuro automático
 
 ## Tecnologias
-HTML, CSS e JavaScript puro.
-
-## Como usar
-Abra o arquivo `index.html` no navegador.
+HTML, CSS e JavaScript puro. Dados salvos no navegador (localStorage).
 
 ## Próximos passos
-- Login com contas reais
-- Banco de dados online
+- Login real e banco de dados
 - Gráfico de evolução do peso
-
-Feito por [seu nome].
+- Fotos e vídeos dos exercícios

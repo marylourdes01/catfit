@@ -1,36 +1,69 @@
-:root{
-  --bg:#EEF3F1; --card:#FFFFFF; --ink:#17332C; --muted:#5B7169;
-  --main:#1F6F54; --hot:#FF6B2C; --line:#D5E0DB;
-}
-@media (prefers-color-scheme: dark){
-  :root{--bg:#0F1D19; --card:#172A24; --ink:#E6F1EC; --muted:#93AAA0; --main:#3FB58A; --line:#27403A;}
-}
+:root{--bg:#EEF3F1;--card:#fff;--ink:#17332C;--muted:#5B7169;--main:#1F6F54;--hot:#FF6B2C;--line:#D5E0DB}
+@media (prefers-color-scheme:dark){:root{--bg:#0F1D19;--card:#172A24;--ink:#E6F1EC;--muted:#93AAA0;--main:#3FB58A;--line:#27403A}}
 *{box-sizing:border-box}
-body{margin:0;font-family:Georgia,"Times New Roman",serif;background:var(--bg);color:var(--ink);line-height:1.6}
-header{padding:32px 20px 20px;max-width:640px;margin:auto}
-h1{font-size:2.4rem;margin:0;letter-spacing:-1px}
-h2{font-size:1.2rem;margin:0 0 12px}
-header p{color:var(--muted);margin:4px 0 16px}
-main{max-width:640px;margin:auto;padding:0 20px 40px;display:grid;gap:16px}
-section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
 [hidden]{display:none!important}
+.top{position:sticky;top:0;z-index:5;background:var(--main);color:#fff;padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.brand{font-size:1.3rem;letter-spacing:-.5px}
+nav{display:flex;gap:4px;overflow-x:auto}
+nav button{border:0;background:transparent;color:#fff;padding:8px 12px;border-radius:99px;white-space:nowrap}
+nav .on{background:var(--hot)}
+main{max-width:760px;margin:auto;padding:16px}
+.view{display:grid;gap:14px}
+h1{font-size:2rem;line-height:1.15;margin:0 0 10px;letter-spacing:-1px}
+h2{margin:6px 0 0}
+h3{margin:0 0 10px;font-size:1.05rem}
+small{color:var(--muted);font-weight:400}
+.hero{display:grid;gap:18px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px}
+@media(min-width:620px){.hero{grid-template-columns:1.2fr 1fr}}
+.hero svg{width:100%;height:auto}
+.grid3{display:grid;gap:12px}
+@media(min-width:620px){.grid3{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.card .ico{font-size:2rem}
+.center{text-align:center}.muted{color:var(--muted)}.label{margin:0 0 6px;font-size:.95rem}
 button,input,select,textarea{font:inherit;color:inherit}
-input,select,textarea{width:100%;padding:10px;margin:6px 0 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
-label{display:block;font-size:.95rem}
-button{cursor:pointer;border:1px solid var(--main);background:transparent;border-radius:999px;padding:8px 16px}
-button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--hot);outline-offset:2px}
-.primary{background:var(--main);color:#fff;width:100%}
-.tabs{display:flex;gap:8px}
-.tabs .on{background:var(--hot);border-color:var(--hot);color:#fff}
+input,textarea{width:100%;padding:10px;margin:6px 0 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+button{cursor:pointer;border-radius:99px;padding:9px 16px;border:1px solid var(--main)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--hot);outline-offset:2px}
+.primary{background:var(--hot);border-color:var(--hot);color:#fff;font-weight:600}
+form .primary{width:100%}
+.ghost{background:transparent}
+.row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chips label{margin:0;border:1px solid var(--line);border-radius:99px;padding:6px 12px;cursor:pointer}
+.chips input{display:none}
+.chips label:has(input:checked){background:var(--main);color:#fff;border-color:var(--main)}
 .bar{height:16px;background:var(--bg);border-radius:99px;overflow:hidden}
 #fill{height:100%;width:0;background:var(--hot);transition:width .4s}
 .day{border-top:1px solid var(--line);padding:10px 0}
-.day h3{margin:0 0 6px;font-size:1rem;color:var(--main)}
+.day h4{margin:0 0 6px;color:var(--main)}
 .ex{display:flex;align-items:center;gap:10px;padding:4px 0}
-.ex input{width:20px;height:20px;margin:0}
+.ex input{width:22px;height:22px;margin:0}
 .ex.done span{text-decoration:line-through;color:var(--muted)}
 .ex .del{margin-left:auto;padding:2px 10px}
-.empty,.note{color:var(--muted)}
 ul{list-style:none;padding:0;margin:0}
 li{border-top:1px solid var(--line);padding:8px 0}
-footer{text-align:center;color:var(--muted);font-size:.85rem;padding:0 20px 30px}
+.pack{text-align:center}
+.pack .price{font-size:1.6rem;font-weight:800;color:var(--hot)}
+.pack.best{border:2px solid var(--hot)}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:460px}
+th,td{padding:8px;border-bottom:1px solid var(--line);text-align:center}
+th:first-child,td:first-child{text-align:left}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:10px 16px 30px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:99px;opacity:0;pointer-events:none;transition:.3s}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.me{border:0;background:transparent;padding:0;margin-left:auto}
+.avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;background:var(--hot);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #fff}
+.avatar.big{width:80px;height:80px;font-size:1.8rem}
+.photo-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.photo{width:80px;height:80px;border-radius:50%;overflow:hidden;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:1.8rem;border:2px dashed var(--line)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.filebtn{border:1px solid var(--main);border-radius:99px;padding:8px 14px;cursor:pointer;margin:0}
+fieldset{border:0;padding:0;margin:0}
+select{width:100%;padding:10px;margin:6px 0 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.tcard{display:flex;gap:12px;align-items:flex-start}
+.tcard h3{margin:0}
+.badge{display:inline-block;background:var(--main);color:#fff;border-radius:99px;padding:2px 10px;font-size:.8rem}
+.tcard .avatar{border-color:var(--line);flex:none}
