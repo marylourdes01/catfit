@@ -24,6 +24,7 @@ function toast(msg) {
 /* ---------- Navegação ---------- */
 function show(view) {
   document.querySelectorAll(".view").forEach((v) => (v.hidden = v.id !== "view-" + view));
+  $("contato").hidden = view !== "inicio";
   document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("on", b.dataset.view === view));
   window.scrollTo(0, 0);
 }
